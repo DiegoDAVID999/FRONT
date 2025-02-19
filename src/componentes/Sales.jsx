@@ -15,28 +15,33 @@ function Sales() {
 
   const addToCart = async () => {
     try {
-      const response = await axios.get(`/api/products/${customId}`)
-      const product = response.data
-
+      const response = await axios.get(`https://https://back-p43y.onrender.com/api/products/${customId}`, {
+        withCredentials: true, // Si tu backend usa autenticación basada en cookies
+      });
+  
+      const product = response.data;
+  
       setCart((prevCart) => {
-        const existingItem = prevCart.find((item) => item.customId === customId)
+        const existingItem = prevCart.find((item) => item.customId === customId);
         if (existingItem) {
           return prevCart.map((item) =>
-            item.customId === customId ? { ...item, quantity: item.quantity + Number(quantity) } : item,
-          )
+            item.customId === customId
+              ? { ...item, quantity: item.quantity + Number(quantity) }
+              : item
+          );
         }
-        return [...prevCart, { ...product, quantity: Number(quantity) }]
-      })
-
-      setCustomId("")
-      setQuantity(1)
-      Swal.fire("Éxito", "Producto agregado al carrito", "success")
+        return [...prevCart, { ...product, quantity: Number(quantity) }];
+      });
+  
+      setCustomId("");
+      setQuantity(1);
+      Swal.fire("Éxito", "Producto agregado al carrito", "success");
     } catch (error) {
-      console.error("Error al agregar producto:", error)
-      Swal.fire("Error", "Producto no encontrado", "error")
+      console.error("Error al agregar producto:", error);
+      Swal.fire("Error", "Producto no encontrado", "error");
     }
-  }
-
+  };
+  
   const removeFromCart = (customId) => {
     setCart((prevCart) => prevCart.filter((item) => item.customId !== customId))
     Swal.fire("Éxito", "Producto removido del carrito", "success")
@@ -44,21 +49,27 @@ function Sales() {
 
   const handleCheckout = async () => {
     if (cart.length === 0) {
-      Swal.fire("Error", "No hay productos en el carrito", "error")
-      return
+      Swal.fire("Error", "No hay productos en el carrito", "error");
+      return;
     }
-
+  
     try {
-      const response = await axios.post("/api/sales", { products: cart })
-      const newSale = response.data
-      setLastSale(newSale)
-      setCart([])
-      Swal.fire("Éxito", "Venta realizada con éxito", "success")
+      const response = await axios.post(
+        "https://back-p43y.onrender.com/api/sales",
+        { products: cart },
+        { withCredentials: true } // Asegura que se envíen las cookies si el backend lo requiere
+      );
+  
+      const newSale = response.data;
+      setLastSale(newSale);
+      setCart([]);
+      Swal.fire("Éxito", "Venta realizada con éxito", "success");
     } catch (error) {
-      console.error("Error al realizar la venta:", error)
-      Swal.fire("Error", "Error al realizar la venta", "error")
+      console.error("Error al realizar la venta:", error);
+      Swal.fire("Error", "Error al realizar la venta", "error");
     }
-  }
+  };
+  
 
   const handlePrint = () => {
     if (!lastSale) {

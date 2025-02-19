@@ -17,23 +17,26 @@ function Reports() {
   }, [])
 
   const fetchReports = async () => {
-    setLoading(true)
-    setError(null)
+    setLoading(true);
+    setError(null);
+  
     try {
       const [dailyRes, weeklyRes] = await Promise.all([
-        axios.get("/api/reports/daily"),
-        axios.get("/api/reports/weekly"),
-      ])
-      setDailyReport(dailyRes.data)
-      setWeeklyReport(weeklyRes.data)
+        axios.get("https://back-p43y.onrender.com/api/reports/daily", { withCredentials: true }),
+        axios.get("https://back-p43y.onrender.com/api/reports/weekly", { withCredentials: true }),
+      ]);
+  
+      setDailyReport(dailyRes.data);
+      setWeeklyReport(weeklyRes.data);
     } catch (error) {
-      console.error("Error fetching reports:", error)
-      setError("Error al cargar los reportes. Por favor, intente de nuevo más tarde.")
-      Swal.fire("Error", "No se pudieron cargar los reportes", "error")
+      console.error("Error fetching reports:", error);
+      setError("Error al cargar los reportes. Por favor, intente de nuevo más tarde.");
+      Swal.fire("Error", "No se pudieron cargar los reportes", "error");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
+  
 
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat("es-CO", { style: "currency", currency: "COP", minimumFractionDigits: 0 }).format(
@@ -52,17 +55,22 @@ function Reports() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(`/api/reports/${type}`)
-          if (type === "daily") setDailyReport(null)
-          if (type === "weekly") setWeeklyReport(null)
-          Swal.fire("Eliminado", "El reporte ha sido eliminado de la base de datos.", "success")
+          await axios.delete(`https://back-p43y.onrender.com/api/reports/${type}`, {
+            withCredentials: true,
+          });
+  
+          if (type === "daily") setDailyReport(null);
+          if (type === "weekly") setWeeklyReport(null);
+  
+          Swal.fire("Eliminado", "El reporte ha sido eliminado de la base de datos.", "success");
         } catch (error) {
-          console.error("Error deleting report:", error)
-          Swal.fire("Error", "No se pudo eliminar el reporte. Por favor, intente de nuevo.", "error")
+          console.error("Error deleting report:", error);
+          Swal.fire("Error", "No se pudo eliminar el reporte. Por favor, intente de nuevo.", "error");
         }
       }
-    })
-  }
+    });
+  };
+  
 
   const DailyReportTable = ({ title, report, onDelete }) => {
     if (!report) return null
