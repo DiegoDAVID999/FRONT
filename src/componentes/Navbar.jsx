@@ -1,6 +1,3 @@
-
-
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -15,35 +12,49 @@ function Navbar({ onLogout }) {
   };
 
   return (
-    <nav className="navbar px-3" style={{ backgroundColor: "#000000"
-    }}>
-      <div className="container-fluid d-flex justify-content-between align-items-center">
-        
+    <nav className="navbar navbar-expand-lg px-3" style={{ backgroundColor: "#000000" }}>
+      <div className="container-fluid">
+        {/* Botón de hamburguesa para dispositivos móviles */}
+        <button 
+          className="navbar-toggler text-white" 
+          type="button" 
+          data-bs-toggle="collapse" 
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i className="bi bi-list" style={{ fontSize: "1.5rem" }}></i>
+        </button>
+
         {/* Logo con icono de café */}
         <Link to="/dashboard" className="navbar-brand text-white d-flex align-items-center fw-bold fs-4">
           <i className="bi bi-cup-hot-fill me-2" style={{ fontSize: "1.5rem" }}></i>
           Moccap
         </Link>
 
-        <ul className="nav">
-          <li className="nav-item">
-            <Link to="/dashboard" className="nav-link text-white">Dashboard</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/products" className="nav-link text-white">Productos</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/sales" className="nav-link text-white">Ventas</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/reports" className="nav-link text-white">Reportes</Link>
-          </li>
-          <li className="nav-item">
-            <button className="btn btn-warning ms-3 fw-bold" onClick={() => setShowModal(true)}>
-              <i className="bi bi-box-arrow-right"></i> Cerrar Sesión
-            </button>
-          </li>
-        </ul>
+        {/* Contenedor colapsable del menú */}
+        <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <Link to="/dashboard" className="nav-link text-white">Dashboard</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/products" className="nav-link text-white">Productos</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/sales" className="nav-link text-white">Ventas</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/reports" className="nav-link text-white">Reportes</Link>
+            </li>
+            <li className="nav-item">
+              <button className="btn btn-warning fw-bold ms-lg-3 mt-2 mt-lg-0" onClick={() => setShowModal(true)}>
+                <i className="bi bi-box-arrow-right"></i> Cerrar Sesión
+              </button>
+            </li>
+          </ul>
+        </div>
       </div>
 
       {/* Modal de Confirmación de Cierre de Sesión */}
@@ -70,7 +81,6 @@ function Navbar({ onLogout }) {
           </div>
         </div>
       )}
-      <br></br>
     </nav>
   );
 }
