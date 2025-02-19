@@ -15,12 +15,16 @@ function Products() {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get("/api/products")
-      setProducts(response.data)
+      const response = await axios.get("https://back-p43y.onrender.com/api/products", {
+        withCredentials: true, // Asegúrate de incluir esto si el backend usa autenticación con cookies
+      });
+      
+      setProducts(response.data);
     } catch (error) {
-      Swal.fire("Error", "Error al cargar los productos", "error")
+      Swal.fire("Error", "Error al cargar los productos", "error");
+      console.error("Error al obtener los productos:", error);
     }
-  }
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -32,22 +36,34 @@ function Products() {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
       if (editingProduct) {
-        await axios.put(`/api/products/${editingProduct.customId}`, editingProduct)
-        Swal.fire("Éxito", "Producto actualizado correctamente", "success")
+        await axios.put(
+          `https://back-p43y.onrender.com/api/products/${editingProduct.customId}`, 
+          editingProduct, 
+          { withCredentials: true } // Asegura autenticación si aplica
+        );
+        Swal.fire("Éxito", "Producto actualizado correctamente", "success");
       } else {
-        await axios.post("/api/products", newProduct)
-        Swal.fire("Éxito", "Producto creado correctamente", "success")
+        await axios.post(
+          "https://back-p43y.onrender.com/api/products", 
+          newProduct, 
+          { withCredentials: true }
+        );
+        Swal.fire("Éxito", "Producto creado correctamente", "success");
       }
-      setNewProduct({ customId: "", name: "", price: "", category: "" })
-      setEditingProduct(null)
-      fetchProducts()
+      
+      setNewProduct({ customId: "", name: "", price: "", category: "" });
+      setEditingProduct(null);
+      fetchProducts();
+      
     } catch (error) {
-      Swal.fire("Error", "Error al guardar el producto", "error")
+      Swal.fire("Error", "Error al guardar el producto", "error");
+      console.error("Error en handleSubmit:", error); // Agregado para depuración
     }
-  }
+};
+
 
   const startEditing = (product) => {
     setEditingProduct(product)
@@ -61,7 +77,7 @@ function Products() {
 
   const deleteProduct = async (customId) => {
     try {
-      await Swal.fire({
+      const result = await Swal.fire({
         title: "¿Estás seguro?",
         text: "No podrás revertir esta acción",
         icon: "warning",
@@ -69,17 +85,23 @@ function Products() {
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         confirmButtonText: "Sí, eliminar",
-      }).then(async (result) => {
-        if (result.isConfirmed) {
-          await axios.delete(`/api/products/${customId}`)
-          Swal.fire("Eliminado", "El producto ha sido eliminado", "success")
-          fetchProducts()
-        }
-      })
+      });
+
+      if (result.isConfirmed) {
+        await axios.delete(
+          `https://back-p43y.onrender.com/api/products/${customId}`,
+          { withCredentials: true } // Agregar si el backend maneja autenticación con cookies
+        );
+
+        Swal.fire("Eliminado", "El producto ha sido eliminado", "success");
+        fetchProducts();
+      }
     } catch (error) {
-      Swal.fire("Error", "Error al eliminar el producto", "error")
+      Swal.fire("Error", "Error al eliminar el producto", "error");
+      console.error("Error en deleteProduct:", error); // Log para depuración
     }
-  }
+};
+
 
   return (
     <div className="container mt-5">
