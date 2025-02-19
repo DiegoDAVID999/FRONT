@@ -70,6 +70,7 @@ function Navbar({ onLogout }) {
           </div>
         </div>
       )}
+      <br></br>
     </nav>
   );
 }

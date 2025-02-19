@@ -1,11 +1,9 @@
-
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../contexts/AuthContext";
 import Swal from "sweetalert2";
-import moccap from "../assets/images/moccap.jpg"; // Aquí importa la imagen desde tu carpeta local
+import moccap from "../assets/images/moccap.jpg";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -27,24 +25,19 @@ function Login() {
 
   return (
     <div
-      className="d-flex justify-content-center align-items-center vh-100"
+      className="d-flex justify-content-center align-items-center min-vh-100 p-3"
       style={{
         backgroundImage: "url('https://wallpapers.com/images/featured/cafeteria-02x9a49rdcr5c18i.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
-      <div className="card col-4" style={{ backgroundColor: "rgba(255, 255, 255, 0.8)", padding: "20px", borderRadius: "10px" }}>
-        <div className="card-body d-flex flex-column justify-content-center align-items-center">
-          {/* Logo de la empresa encima del formulario */}
-          <img
-            src={moccap} // Aquí se usa el logo importado
-            alt="Logo Empresa"
-            style={{ width: "100px", height: "auto", marginBottom: "20px" }} // Ajusta el tamaño como necesites
-          />
-          <h3>Iniciar Sesión</h3>
-          <form className="col-12" onSubmit={handleSubmit}>
-            <div className="col-12">
+      <div className="card p-4 shadow-lg" style={{ backgroundColor: "rgba(255, 255, 255, 0.9)", borderRadius: "10px", maxWidth: "400px", width: "100%" }}>
+        <div className="card-body text-center">
+          <img src={moccap} alt="Logo Empresa" style={{ width: "80px", height: "auto", marginBottom: "20px" }} />
+          <h3 className="mb-3">Iniciar Sesión</h3>
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
               <label className="form-label">Usuario</label>
               <input
                 type="text"
@@ -55,7 +48,7 @@ function Login() {
                 required
               />
             </div>
-            <div className="col-12">
+            <div className="mb-3">
               <label className="form-label">Contraseña</label>
               <input
                 type="password"
@@ -66,11 +59,7 @@ function Login() {
                 required
               />
             </div>
-            <div className="mt-3">
-              <button type="submit" className="btn btn-primary col-12">
-                Iniciar Sesión
-              </button>
-            </div>
+            <button type="submit" className="btn btn-primary w-100">Iniciar Sesión</button>
           </form>
         </div>
       </div>
