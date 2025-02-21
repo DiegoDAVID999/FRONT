@@ -67,8 +67,9 @@ function Navbar({ onLogout }) {
                 <button type="button" className="btn-close" onClick={() => setShowModal(false)}></button>
               </div>
               <div className="modal-body">
-                <p>¿Estás seguro de que quieres cerrar sesión?</p>
-              </div>
+  <p className="text-dark">¿Estás seguro de que quieres cerrar sesión?</p>
+</div>
+
               <div className="modal-footer">
                 <button className="btn btn-secondary" onClick={() => setShowModal(false)}>
                   Cancelar
