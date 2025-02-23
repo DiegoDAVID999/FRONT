@@ -9,7 +9,7 @@ function Receipt({ sale }) {
 
   return (
     <div className="receipt-container print-only">
-      <h2 className="receipt-title">Café El Aroma</h2>
+      <h2 className="receipt-title">Moccap</h2>
       <p className="receipt-subtitle">Recibo de Venta</p>
       <div className="receipt-details">
         <p>Fecha: {new Date(sale.date).toLocaleString()}</p>
