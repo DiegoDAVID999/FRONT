@@ -355,9 +355,9 @@ function Reports() {
       <div className="mb-4">
         <div className="d-flex justify-content-between align-items-center">
           <h3 className="fw-bold">{title}</h3>
-          <button className="btn btn-danger btn-sm" onClick={onDelete}>
+          {/* <button className="btn btn-danger btn-sm" onClick={onDelete}>
             Eliminar
-          </button>
+          </button> */}
         </div>
         <h4 className="text-white mb-3">
           Mes: {report.startDate} - {report.endDate}
