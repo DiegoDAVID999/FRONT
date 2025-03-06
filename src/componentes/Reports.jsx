@@ -639,9 +639,9 @@ function Reports() {
         <div className="mb-4">
           <div className="d-flex justify-content-between align-items-center">
             <h3 className="fw-bold">Reporte Diario</h3>
-            <button className="btn btn-danger btn-sm" onClick={deleteDailyReport}>
+            {/* <button className="btn btn-danger btn-sm" onClick={deleteDailyReport}>
               Eliminar
-            </button>
+            </button> */}
           </div>
           <h4 className="text-white mb-3">Fecha: {dailyReport.date}</h4>
 
@@ -685,7 +685,7 @@ function Reports() {
           </div>
 
           {/* Nueva tabla de totales por método de pago */}
-          <h4 className="fw-bold mt-4">Resumen por Método de Pago</h4>
+          <h4 className="fw-bold mt-4">Total por Método de Pago</h4>
           <div className="table-responsive">
             <table className="table table-bordered text-center">
               <thead className="table-secondary fw-bold">
