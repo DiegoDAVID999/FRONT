@@ -8,7 +8,7 @@ function Products() {
   const [editingProduct, setEditingProduct] = useState(null);
 
   useEffect(() => {
-    fetchProducts();
+    fetchProducts();  
   }, []);
 
   const fetchProducts = async () => {
