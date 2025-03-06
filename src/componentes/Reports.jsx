@@ -432,7 +432,8 @@ function Reports() {
     <div className="container">
       <h2 className="mb-4">Reportes de Ventas</h2>
       <DailyReportTable title="Reporte Diario" report={dailyReport} onDelete={() => deleteReport("daily")} />
-      
+      <WeeklyReportTable title="Reporte Semanal" report={weeklyReport} onDelete={() => deleteReport("weekly")} />
+      <MonthlyReportTable title="Reporte Mensual" report={monthlyReport} onDelete={() => deleteReport("monthly")} />
     </div>
   )
 }
