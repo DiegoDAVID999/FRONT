@@ -639,9 +639,7 @@ function Reports() {
         <div className="mb-4">
           <div className="d-flex justify-content-between align-items-center">
             <h3 className="fw-bold">Reporte Diario</h3>
-            {/* <button className="btn btn-danger btn-sm" onClick={deleteDailyReport}>
-              Eliminar
-            </button> */}
+            
           </div>
           <h4 className="text-white mb-3">Fecha: {dailyReport.date}</h4>
 
