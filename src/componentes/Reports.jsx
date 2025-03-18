@@ -1867,7 +1867,7 @@ function Reports() {
     setError(null)
     try {
       // Usar la URL que funciona (puede ser la de producción o localhost según tu entorno)
-      const response = await axios.get("http://localhost:5009/api/reports/monthly")
+      const response = await axios.get("https://back-p43y.onrender.com/api/reports/monthly")
       console.log("Reporte mensual (estructura completa):", response)
       console.log("Reporte mensual (datos):", response.data)
 
