@@ -302,7 +302,7 @@ function Login() {
     e.preventDefault()
     setLoading(true)
     try {
-      const response = await axios.post("/api/auth/login", { username, password })
+      const response = await axios.post("https://back-p43y.onrender.com/api/auth/login", { username, password })
 
       console.log("Respuesta del servidor:", response.data)
 
