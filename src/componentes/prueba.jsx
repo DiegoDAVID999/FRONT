@@ -21,7 +21,7 @@ function Sales() {
 
   const addToCart = async () => {
     try {
-      const response = await axios.get(`https://back-p43y.onrender.com/api/products/${customId}`, {
+      const response = await axios.get(`http://localhost:5002/api/products/${customId}`, {
         withCredentials: true,
       })
 
